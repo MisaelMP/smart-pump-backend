@@ -3,7 +3,7 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import cors from 'cors';
 import { validationResult } from 'express-validator';
-import { authService } from '../services/AuthService.js';
+import { authService } from '../services/authService.js';
 import {
 	ApiResponse,
 	RateLimitConfig,

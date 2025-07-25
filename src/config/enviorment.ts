@@ -16,7 +16,7 @@ if (!process.env.JWT_SECRET) {
 		throw new Error('JWT_SECRET must be provided in production');
 	}
 	console.warn(
-		'⚠️  JWT_SECRET not found, generating temporary secret for development'
+		'JWT_SECRET not found, generating temporary secret for development'
 	);
 	process.env.JWT_SECRET = generateSecret();
 }
@@ -26,7 +26,7 @@ if (!process.env.JWT_REFRESH_SECRET) {
 		throw new Error('JWT_REFRESH_SECRET must be provided in production');
 	}
 	console.warn(
-		'⚠️  JWT_REFRESH_SECRET not found, generating temporary secret for development'
+		'JWT_REFRESH_SECRET not found, generating temporary secret for development'
 	);
 	process.env.JWT_REFRESH_SECRET = generateSecret();
 }
@@ -43,7 +43,7 @@ const parseEnvironment = (): Environment => {
 			DB_PATH: process.env.DB_PATH,
 		});
 	} catch (error) {
-		console.error('❌ Environment validation failed:', error);
+		console.error('Environment validation failed:', error);
 		throw new Error('Invalid environment configuration');
 	}
 };
@@ -104,7 +104,7 @@ export const logConfig = {
 
 // Validation functions
 export const validateConfiguration = (): void => {
-	console.log('🔧 Validating configuration...');
+	console.log('Validating configuration...');
 
 	// Check JWT secret strength
 	if (env.JWT_SECRET.length < 32) {
@@ -127,14 +127,14 @@ export const validateConfiguration = (): void => {
 		throw new Error('FRONTEND_URL must be a valid URL');
 	}
 
-	console.log('✅ Configuration validation passed');
+	console.log('Configuration validation passed');
 };
 
 // Development helper to show current configuration
 export const showConfiguration = (): void => {
 	if (env.NODE_ENV !== 'development') return;
 
-	console.log('📋 Current Configuration:');
+	console.log('Current Configuration:');
 	console.log(`   Environment: ${env.NODE_ENV}`);
 	console.log(`   Port: ${env.PORT}`);
 	console.log(`   Frontend URL: ${env.FRONTEND_URL}`);
