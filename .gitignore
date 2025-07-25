@@ -165,6 +165,8 @@ Thumbs.db
 *.db
 *.sqlite
 *.sqlite3
+data/db.json
+data/*.json
 
 # JWT keys and certificates
 *.pem
@@ -177,3 +179,27 @@ Thumbs.db
 
 # Docker
 .dockerignore
+
+# TypeScript specific
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# Development database and logs
+data/
+logs/
+*.log.*
+
+# IDE specific
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# MacOS specific
+.DS_Store
+**/.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini

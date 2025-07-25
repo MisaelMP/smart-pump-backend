@@ -41,21 +41,21 @@ authRouter.post(
 	'/login',
 	authController.loginValidation,
 	validateInput,
-	authController.login.bind(authController)
+	authController.login
 );
 
-authRouter.post('/logout', authController.logout.bind(authController));
+authRouter.post('/logout', authController.logout);
 
-authRouter.post('/refresh', authController.refreshToken.bind(authController));
+authRouter.post('/refresh', authController.refreshToken);
 
-authRouter.get('/csrf-token', authController.getCsrfToken.bind(authController));
+authRouter.get('/csrf-token', authController.getCsrfToken);
 
 // Protected auth endpoints
 authRouter.get(
 	'/validate',
 	authenticateToken,
 	requireActiveUser,
-	authController.validateToken.bind(authController)
+	authController.validateToken
 );
 
 authRouter.post(
@@ -63,7 +63,7 @@ authRouter.post(
 	authenticateToken,
 	requireActiveUser,
 	csrfProtection,
-	authController.changePassword.bind(authController)
+	authController.changePassword
 );
 
 // User routes with authentication
@@ -73,11 +73,11 @@ userRouter.use(authenticateToken); // All user routes require authentication
 userRouter.use(requireActiveUser); // All user routes require active account
 
 // User profile endpoints
-userRouter.get('/profile', userController.getCurrentUser.bind(userController));
+userRouter.get('/profile', userController.getCurrentUser);
 
 userRouter.get(
 	'/profile/:userId',
-	userController.getUserProfile.bind(userController)
+	userController.getUserProfile
 );
 
 userRouter.put(
@@ -85,20 +85,20 @@ userRouter.put(
 	csrfProtection,
 	userController.updateValidation,
 	validateInput,
-	userController.updateUser.bind(userController)
+	userController.updateUser
 );
 
-userRouter.get('/balance', userController.getUserBalance.bind(userController));
+userRouter.get('/balance', userController.getUserBalance);
 
 userRouter.get(
 	'/summary',
-	userController.getAccountSummary.bind(userController)
+	userController.getAccountSummary
 );
 
 userRouter.delete(
 	'/account',
 	csrfProtection,
-	userController.deleteAccount.bind(userController)
+	userController.deleteAccount
 );
 
 // Mount routers
@@ -156,8 +156,8 @@ router.get('/docs', (req, res) => {
 	});
 });
 
-// Catch-all for undefined routes
-router.use('*', (req, res) => {
+// Catch-all for undefined routes  
+router.use((req, res) => {
 	res.status(404).json({
 		success: false,
 		message: 'Endpoint not found',

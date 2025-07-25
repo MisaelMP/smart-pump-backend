@@ -2,6 +2,7 @@ import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 import bcrypt from 'bcrypt';
 import path from 'path';
+import fs from 'fs/promises';
 import {
 	DatabaseSchema,
 	User,
@@ -30,6 +31,10 @@ const initializeDatabase = async (
 	state: DatabaseState
 ): Promise<DatabaseState> => {
 	try {
+		// Ensure directory exists
+		const dbDir = path.dirname(state.dbPath);
+		await fs.mkdir(dbDir, { recursive: true });
+
 		const adapter = new JSONFile<DatabaseSchema>(state.dbPath);
 		const db = new Low(adapter, { users: [] });
 
