@@ -1,6 +1,3 @@
-// Central middleware exports following Node.js naming conventions
-// Re-exports from modular middleware files with .middleware.ts suffix
-
 // Authentication middleware
 export {
   authenticateToken,
@@ -31,7 +28,4 @@ export {
 } from './validation.middleware';
 
 // Logging middleware
-export {
-  requestLogger,
-  errorHandler,
-} from './logging.middleware';
+export { requestLogger, errorHandler } from './logging.middleware';
