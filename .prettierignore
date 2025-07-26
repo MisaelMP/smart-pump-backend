@@ -1,0 +1,10 @@
+node_modules
+dist
+build
+coverage
+*.log
+.env*
+data/
+*.json
+!package.json
+!tsconfig.json
