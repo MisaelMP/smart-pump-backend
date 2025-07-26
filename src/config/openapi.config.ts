@@ -1,7 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Application, Request, Response } from 'express';
-import { env } from './environment.config.js';
+import { env } from './environment.config';
 
 const options: swaggerJsdoc.Options = {
   definition: {
@@ -299,7 +299,7 @@ export const setupOpenAPI = (app: Application): void => {
     })
   );
 
-  // Serve OpenAPI spec as JSON (following OpenAPI naming convention)
+  // Serve OpenAPI spec as JSON
   app.get('/openapi.json', (req: Request, res: Response) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(openAPISpec);

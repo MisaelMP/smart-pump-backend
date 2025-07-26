@@ -32,23 +32,24 @@ router.get('/health', (req, res) => {
   });
 });
 
-// Auth routes with rate limiting
+// Auth routes with selective rate limiting
 const authRouter = Router();
-authRouter.use(authRateLimit); // Apply stricter rate limiting to auth endpoints
 
-// Public auth endpoints
+// Public auth endpoints - login has strict rate limiting for demo
 authRouter.post(
   '/login',
+  authRateLimit, // 5 attempts per 15 minutes
   authController.loginValidation,
   validateInput,
   authController.login
 );
 
-authRouter.post('/logout', authController.logout);
+// Other endpoints use lenient rate limiting
+authRouter.post('/logout', apiRateLimit, authController.logout);
 
-authRouter.post('/refresh', authController.refreshToken);
+authRouter.post('/refresh', apiRateLimit, authController.refreshToken);
 
-authRouter.get('/csrf-token', authController.getCsrfToken);
+authRouter.get('/csrf-token', apiRateLimit, authController.getCsrfToken);
 
 // Protected auth endpoints
 authRouter.get(
