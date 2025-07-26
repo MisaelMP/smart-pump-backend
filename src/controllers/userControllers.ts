@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { UpdateUserSchema } from '../types/index.js';
-import { authService } from '../services/authService.js';
-import { databaseService } from '../database/database.js';
-import type { ApiResponse, UpdateUserRequest } from '../types/index.js';
+import { UpdateUserSchema } from '../types/index';
+import { authService } from '../services/authService';
+import { databaseService } from '../database/database';
+import type { ApiResponse, UpdateUserRequest } from '../types/index';
 
 // User update validation rules
 export const updateValidation = [

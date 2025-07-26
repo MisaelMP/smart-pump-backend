@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { LoginSchema } from '../types/index.js';
-import { authService } from '../services/authService.js';
-import { databaseService } from '../database/database.js';
-import type { ApiResponse, LoginRequest } from '../types/index.js';
+import { LoginSchema } from '../types/index';
+import { authService } from '../services/authService';
+import { databaseService } from '../database/database';
+import type { ApiResponse, LoginRequest } from '../types/index';
 
 // Login validation rules
 export const loginValidation = [

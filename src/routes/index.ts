@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { authController } from '../controllers/authControllers.js';
-import { userController } from '../controllers/userControllers.js';
+import { authController } from '../controllers/authControllers';
+import { userController } from '../controllers/userControllers';
 import {
 	authenticateToken,
 	requireActiveUser,
@@ -10,7 +10,7 @@ import {
 	csrfProtection,
 	apiSecurityHeaders,
 	sanitizeInput,
-} from '../middleware/index.js';
+} from '../middleware/index';
 
 const router = Router();
 

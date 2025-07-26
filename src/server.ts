@@ -6,15 +6,15 @@ import {
 	showConfiguration,
 	serverConfig,
 	env,
-} from './config/enviorment.js';
-import { databaseService } from './database/database.js';
-import routes from './routes/index.js';
+} from './config/enviorment';
+import { databaseService } from './database/database';
+import routes from './routes/index';
 import {
 	helmetMiddleware,
 	corsMiddleware,
 	errorHandler,
 	requestLogger,
-} from './middleware/index.js';
+} from './middleware/index';
 
 // Server state interface
 interface ServerState {
@@ -257,7 +257,7 @@ export const server = {
 };
 
 // Start server if this file is run directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
 	server.start().catch((error) => {
 		console.error('Server startup failed:', error);
 		process.exit(1);

@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { EnvSchema, type Environment } from '../types/index.js';
+import { EnvSchema, type Environment } from '../types/index';
 import crypto from 'crypto';
 
 // Load environment variables

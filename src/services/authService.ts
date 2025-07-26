@@ -4,7 +4,7 @@ import {
 	RefreshTokenPayload,
 	User,
 	AuthenticatedUser,
-} from '../types/index.js';
+} from '../types/index';
 
 // Auth service configuration
 interface AuthConfig {

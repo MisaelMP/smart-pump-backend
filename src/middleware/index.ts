@@ -3,12 +3,12 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import cors from 'cors';
 import { validationResult } from 'express-validator';
-import { authService } from '../services/authService.js';
+import { authService } from '../services/authService';
 import {
 	ApiResponse,
 	RateLimitConfig,
 	SecurityConfig,
-} from '../types/index.js';
+} from '../types/index';
 
 // Rate limiting configurations
 export const createRateLimit = (config: RateLimitConfig) => {

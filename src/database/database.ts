@@ -8,7 +8,7 @@ import {
 	User,
 	UserSchema,
 	UpdateUserRequest,
-} from '../types/index.js';
+} from '../types/index';
 
 // Database state
 interface DatabaseState {

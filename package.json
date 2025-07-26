@@ -1,6 +1,7 @@
 {
 	"name": "smart-pump-api",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "SMART Pump User Management API",
 	"main": "dist/server.js",
 	"scripts": {
