@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { UpdateUserSchema } from '../types/index';
-import { authService } from '../services/authService';
+import { authService } from '../services/auth.service';
 import { databaseService } from '../database/database';
 import type { ApiResponse, UpdateUserRequest } from '../types/index';
 

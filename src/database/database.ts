@@ -151,21 +151,34 @@ const seedDatabase = async (
       let password: string;
 
       if (process.env.NODE_ENV === 'development') {
-        // Known passwords for development testing only
-        const testPasswords = [
-          'TestPass123!',
-          'TestPass456!',
-          'TestPass789!',
-          'TestPass000!',
-          'TestPass111!',
+        // Use original passwords from exercise data (must be in .env file)
+        const originalPasswords = [
+          process.env.SEED_PASSWORD_0,
+          process.env.SEED_PASSWORD_1,
+          process.env.SEED_PASSWORD_2,
+          process.env.SEED_PASSWORD_3,
+          process.env.SEED_PASSWORD_4,
         ];
-        password = testPasswords[index] || 'TestPassDefault!';
+
+        const envPassword = originalPasswords[index];
+        if (!envPassword) {
+          throw new Error(
+            `Missing SEED_PASSWORD_${index} in environment variables. Please check your .env.development.local file.`
+          );
+        }
+        password = envPassword;
       } else {
         // Generate cryptographically secure random password for production
         password = require('crypto').randomBytes(16).toString('hex');
       }
 
-      const hashedPassword = await bcrypt.hash(password, state.saltRounds);
+      const hashedPassword = await bcrypt.hash(password, 12);
+
+      // In development, log the original credentials for testing
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`👤 ${user.email} | 🔑 ${password}`);
+      }
+
       return { ...user, password: hashedPassword };
     })
   );

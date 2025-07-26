@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { authController } from '../controllers/authControllers';
-import { userController } from '../controllers/userControllers';
+import { authController } from '../controllers/auth.controller';
+import { userController } from '../controllers/user.controller';
 import {
   authenticateToken,
   requireActiveUser,

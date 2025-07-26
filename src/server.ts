@@ -1,3 +1,12 @@
+import dotenv from 'dotenv';
+
+// Load environment variables based on NODE_ENV
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({ path: '.env.development.local' });
+} else {
+  dotenv.config();
+}
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
@@ -6,7 +15,8 @@ import {
   showConfiguration,
   serverConfig,
   env,
-} from './config/enviorment';
+} from './config/environment.config.js';
+import { setupOpenAPI } from './config/openapi.config.js';
 import { databaseService } from './database/database';
 import routes from './routes/index';
 import {
@@ -75,6 +85,9 @@ const setupMiddleware = (app: express.Application): void => {
 
 // Setup routes
 const setupRoutes = (app: express.Application): void => {
+  // Setup OpenAPI API documentation
+  setupOpenAPI(app);
+
   // API routes
   app.use('/api', routes);
 
@@ -88,6 +101,7 @@ const setupRoutes = (app: express.Application): void => {
         version: '1.0.0',
         environment: env.NODE_ENV,
         apiDocumentation: '/api/docs',
+        openApiSpec: '/openapi.json',
         healthCheck: '/api/health',
         timestamp: new Date().toISOString(),
       },
@@ -193,16 +207,9 @@ const logServerStart = (): void => {
     console.log(`Frontend URL: ${env.FRONTEND_URL}`);
     console.log(`Database: ${env.DB_PATH}`);
     console.log('');
-    console.log('Development Test Users:');
     console.log(
-      '   Email: henderson.briggs@geeknet.net | Password: TestPass123!'
+      '✅ Development mode: Check database seeding logs above for test credentials'
     );
-    console.log('   Email: lott.kramer@poshome.us | Password: TestPass456!');
-    console.log('   Email: gibson.duke@zillar.com | Password: TestPass789!');
-    console.log(
-      '   Email: ruby.glenn@waterbaby.co.uk | Password: TestPass000!'
-    );
-    console.log('   WARNING: Development passwords only - not for production');
   }
 };
 
