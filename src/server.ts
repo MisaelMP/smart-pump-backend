@@ -208,7 +208,7 @@ const logServerStart = (): void => {
     console.log(`Database: ${env.DB_PATH}`);
     console.log('');
     console.log(
-      '✅ Development mode: Check database seeding logs above for test credentials'
+      'Development mode: Check database seeding logs above for test credentials'
     );
   }
 };

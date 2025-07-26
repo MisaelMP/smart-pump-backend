@@ -262,7 +262,7 @@ const updateUser = async (
   // Validate the updated user
   try {
     UserSchema.parse(updatedUser);
-  } catch (error) {
+  } catch {
     throw new Error('Invalid user data after update');
   }
 

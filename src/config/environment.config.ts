@@ -123,7 +123,7 @@ export const validateConfiguration = (): void => {
   // Validate frontend URL format
   try {
     new URL(env.FRONTEND_URL);
-  } catch (error) {
+  } catch {
     throw new Error('FRONTEND_URL must be a valid URL');
   }
 

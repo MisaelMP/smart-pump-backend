@@ -122,7 +122,7 @@ const extractTokenFromHeader = (
 
 // Sanitize user for response (remove password)
 const sanitizeUserForResponse = (user: User): AuthenticatedUser => {
-  const { password, ...userWithoutPassword } = user;
+  const { password: _password, ...userWithoutPassword } = user;
   return userWithoutPassword;
 };
 
@@ -215,7 +215,7 @@ const verifyCsrfToken = (config: AuthConfig, token: string): boolean => {
     }) as { purpose: string; timestamp: number };
 
     return decoded.purpose === 'csrf';
-  } catch (error) {
+  } catch {
     return false;
   }
 };

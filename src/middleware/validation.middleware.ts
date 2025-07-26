@@ -65,12 +65,12 @@ export const sanitizeInput = (
   next: NextFunction
 ): void => {
   // Basic input sanitization
-  const sanitize = (obj: any): any => {
+  const sanitize = (obj: unknown): unknown => {
     if (typeof obj === 'string') {
       return obj.trim().replace(/<script[^>]*>.*?<\/script>/gi, '');
     }
     if (typeof obj === 'object' && obj !== null) {
-      const sanitized: any = {};
+      const sanitized: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(obj)) {
         sanitized[key] = sanitize(value);
       }
@@ -89,14 +89,14 @@ export const sanitizeInput = (
     const sanitizedQuery = sanitize(req.query);
     // Clear existing query properties and replace with sanitized ones
     Object.keys(req.query).forEach((key) => {
-      delete (req.query as any)[key];
+      delete (req.query as Record<string, unknown>)[key];
     });
     Object.assign(req.query, sanitizedQuery);
   }
 
   // Sanitize route parameters
   if (req.params) {
-    req.params = sanitize(req.params);
+    req.params = sanitize(req.params) as Record<string, string>;
   }
 
   next();

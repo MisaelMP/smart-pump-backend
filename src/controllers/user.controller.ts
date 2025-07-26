@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import { UpdateUserSchema } from '../types/index';
 import { authService } from '../services/auth.service';
 import { databaseService } from '../database/database';
-import type { ApiResponse, UpdateUserRequest } from '../types/index';
+import type { ApiResponse, UpdateUserRequest, User } from '../types/index';
 
 // User update validation rules
 export const updateValidation = [
@@ -35,7 +35,7 @@ export const updateValidation = [
 ];
 
 // Calculate profile completeness
-const calculateProfileCompleteness = (user: any): number => {
+const calculateProfileCompleteness = (user: User): number => {
   const fields = [
     'name.first',
     'name.last',
@@ -47,9 +47,14 @@ const calculateProfileCompleteness = (user: any): number => {
   let completedFields = 0;
 
   fields.forEach((field) => {
-    const value = field.includes('.')
-      ? field.split('.').reduce((obj, key) => obj?.[key], user)
-      : user[field];
+    let value: string | undefined;
+
+    if (field === 'name.first') value = user.name?.first;
+    else if (field === 'name.last') value = user.name?.last;
+    else if (field === 'email') value = user.email;
+    else if (field === 'phone') value = user.phone;
+    else if (field === 'address') value = user.address;
+    else if (field === 'company') value = user.company;
 
     if (value && value.toString().trim() !== '') {
       completedFields++;

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { ApiResponse, RateLimitConfig } from '../types/index';
 
