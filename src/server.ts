@@ -1,11 +1,7 @@
 import dotenv from 'dotenv';
 
-// Load environment variables based on NODE_ENV
-if (process.env.NODE_ENV === 'development') {
-  dotenv.config({ path: '.env.development.local' });
-} else {
-  dotenv.config();
-}
+// Load environment variables
+dotenv.config();
 
 import express from 'express';
 import cookieParser from 'cookie-parser';
