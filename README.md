@@ -29,7 +29,7 @@ This API powers user authentication and account management for the SMART Pump ap
    # Copy development environment template
    cp .env.development.local.example .env.development.local
    ```
-   
+
    **Required**: The `.env.development.local` file contains seed passwords needed for development database seeding.
 
 3. **Start the server**
@@ -57,7 +57,7 @@ The API comes with 5 test users ready to go (seeded from original exercise data)
 
 // Additional test accounts available with passwords in .env.development.local
 // - boyd.small@endipine.biz (inactive account)
-// - lott.kramer@poshome.us 
+// - lott.kramer@poshome.us
 // - gibson.duke@zillar.com
 // - ruby.glenn@waterbaby.co.uk
 ```
@@ -133,13 +133,25 @@ npm run format      # Auto-format code
 
 ## Configuration
 
-Key environment variables:
+### JWT Secrets (Required for Development & Production)
+
+**Generate secure JWT secrets:**
+
+```bash
+# Generate JWT_SECRET
+node -e "console.log('JWT_SECRET=' + require('crypto').randomBytes(64).toString('hex'))"
+
+# Generate JWT_REFRESH_SECRET (must be different)
+node -e "console.log('JWT_REFRESH_SECRET=' + require('crypto').randomBytes(64).toString('hex'))"
+```
+
+### Environment Variables
 
 ```bash
 NODE_ENV=development        # Environment mode
 PORT=3001                  # Server port
-JWT_SECRET=your_secret     # JWT signing secret
-JWT_REFRESH_SECRET=secret  # Refresh token secret
+JWT_SECRET=your_secret     # JWT signing secret (generate with command above)
+JWT_REFRESH_SECRET=secret  # Refresh token secret (generate with command above)
 FRONTEND_URL=http://localhost:3000  # CORS origin
 ```
 
