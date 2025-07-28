@@ -3,7 +3,15 @@ import { EnvSchema, type Environment } from '../types/index';
 import crypto from 'crypto';
 
 // Load environment variables
+// Load default environment file first
 config();
+
+// Then load environment-specific local file based on NODE_ENV
+if (process.env.NODE_ENV === 'development') {
+  config({ path: '.env.development.local' });
+} else if (process.env.NODE_ENV === 'production') {
+  config({ path: '.env.production.local' });
+}
 
 // Generate secure secrets if not provided (for development)
 const generateSecret = (): string => {
