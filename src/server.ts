@@ -260,7 +260,7 @@ export const server = {
 };
 
 // Start server if this file is run directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   server.start().catch((error) => {
     console.error('Server startup failed:', error);
     process.exit(1);
