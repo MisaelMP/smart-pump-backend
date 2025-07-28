@@ -6,11 +6,11 @@ import crypto from 'crypto';
 // Load default environment file first
 config();
 
-// Then load environment-specific local file based on NODE_ENV
+// Then load environment-specific local file based on NODE_ENV (with override)
 if (process.env.NODE_ENV === 'development') {
-  config({ path: '.env.development.local' });
+  config({ path: '.env.development.local', override: true });
 } else if (process.env.NODE_ENV === 'production') {
-  config({ path: '.env.production.local' });
+  config({ path: '.env.production.local', override: true });
 }
 
 // Generate secure secrets if not provided (for development)
