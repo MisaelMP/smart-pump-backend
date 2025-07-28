@@ -168,15 +168,22 @@ const seedDatabase = async (
         }
         password = envPassword;
       } else {
-        // Generate cryptographically secure random password for production
-        password = require('crypto').randomBytes(16).toString('hex');
+        // Production: Use known password for the first user (for testing), random for others
+        if (index === 0) {
+          password = 'Production123!'; // Known password for testing
+        } else {
+          // Generate cryptographically secure random password for other users
+          password = require('crypto').randomBytes(16).toString('hex');
+        }
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      // In development, log the original credentials for testing
+      // Log credentials for testing
       if (process.env.NODE_ENV === 'development') {
         console.log(`👤 ${user.email} | 🔑 ${password}`);
+      } else if (process.env.NODE_ENV === 'production' && index === 0) {
+        console.log(`🚀 Production Test User: ${user.email} | 🔑 ${password}`);
       }
 
       return { ...user, password: hashedPassword };

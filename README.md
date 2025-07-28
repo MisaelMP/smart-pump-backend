@@ -26,9 +26,11 @@ This API powers user authentication and account management for the SMART Pump ap
 2. **Set up environment**
 
    ```bash
-   cp .env.example .env
-   # Edit .env with your settings (JWT secrets are auto-generated for development)
+   # Copy development environment template
+   cp .env.development.local.example .env.development.local
    ```
+   
+   **Required**: The `.env.development.local` file contains seed passwords needed for development database seeding.
 
 3. **Start the server**
 
@@ -42,14 +44,22 @@ This API powers user authentication and account management for the SMART Pump ap
 
 ## Try It Out
 
-The API comes with test users ready to go:
+The API comes with 5 test users ready to go (seeded from original exercise data):
 
 ```javascript
-// Test accounts (password: "password123")
+// Primary test account
 {
-  email: "john.doe@example.com",
-  name: "John Doe"
+  email: "henderson.briggs@geeknet.net",
+  password: "23derd*334",
+  name: "Henderson Briggs",
+  isActive: true
 }
+
+// Additional test accounts available with passwords in .env.development.local
+// - boyd.small@endipine.biz (inactive account)
+// - lott.kramer@poshome.us 
+// - gibson.duke@zillar.com
+// - ruby.glenn@waterbaby.co.uk
 ```
 
 **Demo the Security Features:**
