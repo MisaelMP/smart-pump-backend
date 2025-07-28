@@ -3,6 +3,7 @@ import { JSONFile } from 'lowdb/node';
 import bcrypt from 'bcrypt';
 import path from 'path';
 import fs from 'fs/promises';
+import crypto from 'crypto';
 import {
   DatabaseSchema,
   User,
@@ -173,7 +174,7 @@ const seedDatabase = async (
           password = 'Production123!'; // Known password for testing
         } else {
           // Generate cryptographically secure random password for other users
-          password = require('crypto').randomBytes(16).toString('hex');
+          password = crypto.randomBytes(16).toString('hex');
         }
       }
 
